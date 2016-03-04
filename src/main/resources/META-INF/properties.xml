@@ -17,8 +17,17 @@
     <value>1000</value>
   </property>
   <property>
+    <name>dt.application.MyFirstApplication.operator.eventGenerator.attr.MEMORY_MB</name>
+    <value>2048</value>
+  </property>
+
+  <property>
     <name>dt.application.MyFirstApplication.operator.console.prop.stringFormat</name>
     <value>hello world: %s</value>
+  </property>
+  <property>
+    <name>dt.</name>
+    <value>1024</value>
   </property>
 </configuration>
 

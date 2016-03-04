@@ -9,9 +9,13 @@ import com.datatorrent.api.StreamingApplication;
 import com.datatorrent.api.annotation.ApplicationAnnotation;
 import com.datatorrent.common.partitioner.StatelessPartitioner;
 import com.datatorrent.contrib.kafka.KafkaSinglePortOutputOperator;
+import kafka.producer.Partitioner;
+import kafka.utils.VerifiableProperties;
 import org.apache.hadoop.conf.Configuration;
 
 import java.util.Properties;
+import java.util.Random;
+
 
 @ApplicationAnnotation(name="KafkaLoadGenerator")
 public class Application implements StreamingApplication
@@ -26,14 +30,16 @@ public class Application implements StreamingApplication
 
     Properties props = new Properties();
     props.setProperty("serializer.class", "kafka.serializer.StringEncoder");
+    props.setProperty("partitioner.class", "com.example.loadGenerator.SimplePartitioner");
     props.put("metadata.broker.list", "node34:9092,node32:9092,node36:9092,node30:9092");
     props.setProperty("producer.type", "async");
 
-    kafkaOutput.setTopic("benchmark_topic_8");
+    kafkaOutput.setTopic("benchmark_v2_12");
     kafkaOutput.setConfigProperties(props);
 
-    dag.addStream("randomData", eventGenerator.out, kafkaOutput.inputPort);
+    dag.addStream("randomData", eventGenerator.out, kafkaOutput.inputPort).setLocality(DAG.Locality.THREAD_LOCAL);
     dag.setInputPortAttribute(kafkaOutput.inputPort, Context.PortContext.PARTITION_PARALLEL, true);
     dag.setAttribute(eventGenerator, Context.OperatorContext.PARTITIONER, new StatelessPartitioner<EventGenerator>(4));
   }
+
 }

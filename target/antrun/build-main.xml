@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <move file="/home/sandesh/dev/LoadGenerator/target/loadGenerator-1.0-SNAPSHOT-apexapp.jar" tofile="/home/sandesh/dev/LoadGenerator/target/loadGenerator-1.0-SNAPSHOT.apa"/>
+</target>
+</project>
