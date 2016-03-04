@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class SimplePartitioner implements Partitioner {
 
-    Random random = new Random() ;
+    Random random = new Random(System.currentTimeMillis()) ;
     public SimplePartitioner (VerifiableProperties props) {
 
     }

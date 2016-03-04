@@ -31,15 +31,15 @@ public class Application implements StreamingApplication
     Properties props = new Properties();
     props.setProperty("serializer.class", "kafka.serializer.StringEncoder");
     props.setProperty("partitioner.class", "com.example.loadGenerator.SimplePartitioner");
-    props.put("metadata.broker.list", "node34:9092,node32:9092,node36:9092,node30:9092");
+    props.put("metadata.broker.list", "node30:9092,node32:9092,node34:9092,node36:9092");
     props.setProperty("producer.type", "async");
 
-    kafkaOutput.setTopic("benchmark_v2_12");
+    kafkaOutput.setTopic("benchmark_v2_8");
     kafkaOutput.setConfigProperties(props);
 
     dag.addStream("randomData", eventGenerator.out, kafkaOutput.inputPort).setLocality(DAG.Locality.THREAD_LOCAL);
     dag.setInputPortAttribute(kafkaOutput.inputPort, Context.PortContext.PARTITION_PARALLEL, true);
-    dag.setAttribute(eventGenerator, Context.OperatorContext.PARTITIONER, new StatelessPartitioner<EventGenerator>(4));
+    dag.setAttribute(eventGenerator, Context.OperatorContext.PARTITIONER, new StatelessPartitioner<EventGenerator>(6));
   }
 
 }
