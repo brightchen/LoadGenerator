@@ -1,1 +1,0 @@
-{"attributes":{"APPLICATION_NAME":"KafkaLoadGenerator","APPLICATION_ID":"app_local_1457116111549","STREAMING_WINDOW_SIZE_MILLIS":500,"CHECKPOINT_WINDOW_COUNT":60,"APPLICATION_PATH":"file:\/home\/sandesh\/dev\/LoadGenerator\/target\/com.datatorrent.stram.StramLocalCluster","STORAGE_AGENT":"com.datatorrent.common.util.AsyncFSStorageAgent@54c5a2ff"},"metrics":{}}
