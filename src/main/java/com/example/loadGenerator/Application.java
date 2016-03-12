@@ -25,8 +25,7 @@ public class Application implements StreamingApplication
   public void populateDAG(DAG dag, Configuration conf)
   {
     EventGenerator eventGenerator = dag.addOperator("eventGenerator", new EventGenerator());
-
-    KafkaSinglePortOutputOperator<String,String> kafkaOutput = dag.addOperator("kafkaOutput", new KafkaSinglePortOutputOperator()) ;
+    KafkaOutput<String,String> kafkaOutput = dag.addOperator("kafkaOutput", new KafkaOutput()) ;
 
     Properties props = new Properties();
     props.setProperty("serializer.class", "kafka.serializer.StringEncoder");
@@ -34,7 +33,6 @@ public class Application implements StreamingApplication
     props.put("metadata.broker.list", "node30:9092,node32:9092,node34:9092,node36:9092");
     props.setProperty("producer.type", "async");
 
-    kafkaOutput.setTopic("benchmark_v2_8");
     kafkaOutput.setConfigProperties(props);
 
     dag.addStream("randomData", eventGenerator.out, kafkaOutput.inputPort).setLocality(DAG.Locality.THREAD_LOCAL);

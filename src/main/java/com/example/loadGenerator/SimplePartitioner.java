@@ -19,7 +19,6 @@ public class SimplePartitioner implements Partitioner {
 
     public int partition(Object key, int a_numPartitions) {
 
-        return random.nextInt(a_numPartitions);
+        return random.nextInt(a_numPartitions) ;
     }
-
 }
