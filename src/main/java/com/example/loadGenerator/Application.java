@@ -8,13 +8,11 @@ import com.datatorrent.api.DAG;
 import com.datatorrent.api.StreamingApplication;
 import com.datatorrent.api.annotation.ApplicationAnnotation;
 import com.datatorrent.common.partitioner.StatelessPartitioner;
-import com.datatorrent.contrib.kafka.KafkaSinglePortOutputOperator;
-import kafka.producer.Partitioner;
-import kafka.utils.VerifiableProperties;
 import org.apache.hadoop.conf.Configuration;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
-import java.util.Random;
 
 
 @ApplicationAnnotation(name="KafkaLoadGenerator")
@@ -35,9 +33,23 @@ public class Application implements StreamingApplication
 
     kafkaOutput.setConfigProperties(props);
 
+    eventGenerator.init();
+    Map<String, List<String>> campaigns = eventGenerator.getCampaigns();
+
+    setupRedis(campaigns, "node35");
+
     dag.addStream("randomData", eventGenerator.out, kafkaOutput.inputPort).setLocality(DAG.Locality.THREAD_LOCAL);
     dag.setInputPortAttribute(kafkaOutput.inputPort, Context.PortContext.PARTITION_PARALLEL, true);
-    dag.setAttribute(eventGenerator, Context.OperatorContext.PARTITIONER, new StatelessPartitioner<EventGenerator>(6));
+    dag.setAttribute(eventGenerator, Context.OperatorContext.PARTITIONER, new StatelessPartitioner<EventGenerator>(8));
   }
+
+  private void setupRedis(Map<String, List<String>> campaigns, String redis)
+  {
+    RedisHelper redisHelper = new RedisHelper();
+    redisHelper.init(redis);
+
+    redisHelper.prepareRedis(campaigns);
+  }
+
 
 }

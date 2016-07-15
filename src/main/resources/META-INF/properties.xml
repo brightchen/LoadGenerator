@@ -14,7 +14,12 @@
   -->
   <property>
     <name>dt.application.KafkaLoadGenerator.operator.kafkaOutput.prop.topic</name>
-    <value>benchmark_v5_8</value>
+    <value>benchmark_v9_8</value>
+  </property>
+
+  <property>
+    <name>dt.application.KafkaLoadGenerator.operator.eventGenerator.prop.mappingFile</name>
+    <value>/user/sandesh/test3.txt</value>
   </property>
 
   <property>
