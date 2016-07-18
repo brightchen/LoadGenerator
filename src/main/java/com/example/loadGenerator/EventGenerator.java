@@ -25,6 +25,9 @@ public class EventGenerator implements InputOperator
     private int eventsIdx = 0;
     private StringBuilder sb = new StringBuilder();
 
+    protected int batchSize = 20;
+    protected int waitTime = 1;
+    
     private String pageID = UUID.randomUUID().toString();
     private String userID = UUID.randomUUID().toString();
     private final String[] eventTypes = new String[]{"view", "click", "purchase"};
@@ -141,8 +144,15 @@ public class EventGenerator implements InputOperator
     @Override
     public void emitTuples()
     {
-        for (int index = 0; index < 100; ++index) {
+        for (int index = 0; index < batchSize; ++index) {
             out.emit(generateElement());
+        }
+        if(waitTime > 0) {
+          try {
+            Thread.sleep(waitTime);
+          } catch (Exception e) {
+            //do nothing
+          }
         }
     }
 
@@ -168,6 +178,26 @@ public class EventGenerator implements InputOperator
     public void teardown()
     {
 
+    }
+
+    public int getBatchSize()
+    {
+      return batchSize;
+    }
+
+    public void setBatchSize(int batchSize)
+    {
+      this.batchSize = batchSize;
+    }
+
+    public int getWaitTime()
+    {
+      return waitTime;
+    }
+
+    public void setWaitTime(int waitTime)
+    {
+      this.waitTime = waitTime;
     }
 
 }
