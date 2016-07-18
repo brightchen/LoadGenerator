@@ -23,13 +23,13 @@
   </property>
 
   <property>
-    <name>dt.application.MyFirstApplication.operator.eventGenerator.attr.MEMORY_MB</name>
+    <name>dt.application.KafkaLoadGenerator.operator.eventGenerator.attr.MEMORY_MB</name>
     <value>2048</value>
   </property>
 
 
   <property>
-    <name>dt.application.MyFirstApplication.operator.console.prop.stringFormat</name>
+    <name>dt.application.KafkaLoadGenerator.operator.console.prop.stringFormat</name>
     <value>hello world: %s</value>
   </property>
   <property>
@@ -38,11 +38,11 @@
   </property>
   
   <property>
-    <name>dt.application.MyFirstApplication.operator.eventGenerator.batchSize</name>
+    <name>dt.application.KafkaLoadGenerator.operator.eventGenerator.batchSize</name>
     <value>20</value>
   </property>
   <property>
-    <name>dt.application.MyFirstApplication.operator.eventGenerator.waitTime</name>
+    <name>dt.application.KafkaLoadGenerator.operator.eventGenerator.waitTime</name>
     <value>1</value>
   </property>
 </configuration>
