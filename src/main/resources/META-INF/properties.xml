@@ -14,7 +14,7 @@
   -->
   <property>
     <name>dt.application.KafkaLoadGenerator.operator.kafkaOutput.prop.topic</name>
-    <value>benchmark_v9_8</value>
+    <value>benchmark_v1_3</value>
   </property>
 
   <property>
